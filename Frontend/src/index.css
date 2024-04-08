@@ -1,0 +1,10 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.main2 {
+    height: 1000px;
+    width: 100%;
+    background-color: darkslategray;
+    margin-top: 0;
+}
