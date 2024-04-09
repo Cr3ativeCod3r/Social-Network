@@ -8,6 +8,7 @@ import {IoIosLogOut} from "react-icons/io";
 import {logout} from '../reducers/userSlice.js';
 import {CiSettings} from "react-icons/ci";
 import {CiUser} from "react-icons/ci";
+import {useNavigate} from 'react-router-dom';
 
 function Modal({isOpen, onClose, formType}) {
     const modalRef = useRef();
@@ -38,6 +39,10 @@ function Modal({isOpen, onClose, formType}) {
 }
 
 function Navbar() {
+    const navigate = useNavigate();
+    const nav = () => {
+        navigate('/home');
+    };
     const dispatch = useDispatch();
     const user = useSelector(state => state.user);
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -48,7 +53,7 @@ function Navbar() {
             <div className="navbar h-24 bg-current flex items-center justify-between z-10">
                 <div className="flex-grow flex justify-center">
                     <div className="flex flex-col items-center ml-40">
-                        <img src={logo} alt="Logo" className="w-20 mt-2"/>
+                        <img src={logo} alt="Logo" className="w-20 mt-2" onClick={nav}/>
                         <button className="btn btn-ghost text-2xl text-black">Studenci Lublin</button>
                     </div>
                 </div>
@@ -83,28 +88,28 @@ function Navbar() {
                                     <ul tabIndex={0}
                                         className="bg-slate-600 mt-4 z-[1] p-3 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-64">
                                         {/* Zwiększony padding i szerokość */}
-                                            <li>
-                                                <a className="justify-between text-lg" style={{pointerEvents: 'none'}}>
-                                                    {user.first_name} {user.last_name}
-                                                </a>
-                                            </li>
+                                        <li>
+                                            <a className="justify-between text-lg" style={{pointerEvents: 'none'}}>
+                                                {user.first_name} {user.last_name}
+                                            </a>
+                                        </li>
 
-                                            <li><a className="text-lg"><CiUser className="mt-0.5 w-6 h-6"/> Profile</a>
-                                            </li>
+                                        <li><a className="text-lg"><CiUser className="mt-0.5 w-6 h-6"/> Profile</a>
+                                        </li>
 
-                                            <li><a className="text-lg"><CiSettings
-                                                className="mt-1 w-6 h-6"/> Settings</a>
-                                            </li>
+                                        <li><a className="text-lg"><CiSettings
+                                            className="mt-1 w-6 h-6"/> Settings</a>
+                                        </li>
 
-                                            <li>
-                                                <button onClick={() => {
-                                                    dispatch(logout());
-                                                    location.reload();
-                                                }} className="flex items-center text-left text-lg">
-                                                    <IoIosLogOut className="mt-1 w-6 h-6"/>
-                                                    <p className="m-0">Logout</p>
-                                                </button>
-                                            </li>
+                                        <li>
+                                            <button onClick={() => {
+                                                dispatch(logout());
+                                                location.reload();
+                                            }} className="flex items-center text-left text-lg">
+                                                <IoIosLogOut className="mt-1 w-6 h-6"/>
+                                                <p className="m-0">Logout</p>
+                                            </button>
+                                        </li>
                                     </ul>
                                 </div>
                             </div>
@@ -118,6 +123,7 @@ function Navbar() {
 
             <div className="z-0 navbar flex justify-center pt-0 pb-0">
                 <ul className="menu menu-vertical lg:menu-horizontal bg-base-200 rounded-box w-full flex justify-center">
+                    <li><a href="#!">Złote stony</a></li>
                     <li><a href="#!">Forum</a></li>
                     <li><a href="Chat">Chat</a></li>
                     <li><a href="#!">Kalendarz wydarzeń</a></li>

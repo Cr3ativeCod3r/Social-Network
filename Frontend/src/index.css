@@ -8,3 +8,24 @@
     background-color: darkslategray;
     margin-top: 0;
 }
+
+.selected {
+    color: #19b219;
+    background-color: rgb(71 85 105);
+    border-radius: 10px;
+
+}
+
+body {
+    overflow-y: scroll;
+}
+
+@media screen and (max-width: 1000px) {
+
+    .chat {
+        margin-right: -10px;
+    }
+
+
+}
+

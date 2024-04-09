@@ -53,8 +53,17 @@ const userSchema = mongoose.Schema(
         field: {
             type: String,
             required: true
-        }
-
+        },
+        chatban:
+            {
+                type: Number,
+                default: 0
+            },
+        postban: {
+            type: Number,
+            default: 1
+        },
+        usertyp: {type: String, default: 'user', enum: ['user', 'mod', 'admin']}
 
     },
     {

@@ -14,7 +14,6 @@ const {generateToken} = require("../helpers/tokens");
 // const generateCode = require("../helpers/generateCode");
 const mongoose = require("mongoose");
 
-
 exports.register = async (req, res) => {
     try {
         const {
@@ -28,39 +27,40 @@ exports.register = async (req, res) => {
             uczelnia
         } = req.body;
 
-        // if (!validateEmail(email)) {
-        //     return res.status(400).json({message: "invalid email address"});
-        // }
-        // const check = await User.findOne({email});
-        // if (check) {
-        //     return res.status(400).json({message: "This email address already exists, try with a different email address"});
-        // }
-        //
-        // if (!validateLength(first_name, 3, 30)) {
-        //     return res.status(400).json({message: "Imię musi mieć od 3 do 30 znaków."});
-        // }
-        // if (!validateLength(last_name, 3, 30)) {
-        //     return res.status(400).json({message: "Nazwisko musi mieć od 3 do 30 znaków."});
-        // }
-        // if (!validateLength(password, 6, 40)) {
-        //     return res.status(400).json({message: "Hasło musi mieć przynajmniej 6 znaków."});
-        // }
+        if (!validateEmail(email)) {
+            return res.status(400).json({message: "Niepoprawny adres email"});
+        }
+        const check = await User.findOne({email});
+        if (check) {
+            return res.status(400).json({message: "Ten adres email już istnieje. Spróbuj z innym adresem email"});
+        }
+
+        if (!validateLength(imie, 3, 30)) {
+            return res.status(400).json({message: "Imię musi mieć od 3 do 30 znaków."});
+        }
+        if (!validateLength(nazwisko, 3, 30)) {
+            return res.status(400).json({message: "Nazwisko musi mieć od 3 do 30 znaków."});
+        }
+        if (!validateLength(haslo, 6, 40)) {
+            return res.status(400).json({message: "Hasło musi mieć przynajmniej 6 znaków."});
+        }
 
         const cryptedPassword = await bcrypt.hash(haslo, 12);
 
-        let newUsername = imie + nazwisko;
-
+        const newUsername = imie + nazwisko;
 
         const user = await new User({
-            first_name = imie,
-            last_name = nazwisko,
-            email = email,
+            first_name: imie,
+            last_name: nazwisko,
+            email: email,
             password: cryptedPassword,
             username: newUsername,
-            university = uczelnia,
-            field = kierunek,
-            year = rok
+            university: uczelnia,
+            field: kierunek,
+            year: rok
         }).save();
+
+        res.status(201).json({message: "Użytkownik został pomyślnie zarejestrowany."});
 
     } catch (error) {
         res.status(500).json({message: error.message});
