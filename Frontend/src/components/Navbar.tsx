@@ -9,6 +9,7 @@ import {logout} from '../reducers/userSlice.js';
 import {CiSettings} from "react-icons/ci";
 import {CiUser} from "react-icons/ci";
 import {useNavigate} from 'react-router-dom';
+import {IoIosBuild} from "react-icons/io";
 
 function Modal({isOpen, onClose, formType}) {
     const modalRef = useRef();
@@ -53,7 +54,7 @@ function Navbar() {
             <div className="navbar h-24 bg-current flex items-center justify-between z-10">
                 <div className="flex-grow flex justify-center">
                     <div className="flex flex-col items-center ml-40">
-                        <img src={logo} alt="Logo" className="w-20 mt-2" onClick={nav}/>
+                        <img src={logo} alt="Logo" className="w-20 mt-2 cursor-pointer" onClick={nav}/>
                         <button className="btn btn-ghost text-2xl text-black">Studenci Lublin</button>
                     </div>
                 </div>
@@ -123,14 +124,14 @@ function Navbar() {
 
             <div className="z-0 navbar flex justify-center pt-0 pb-0">
                 <ul className="menu menu-vertical lg:menu-horizontal bg-base-200 rounded-box w-full flex justify-center">
-                    <li><a href="#!">Złote stony</a></li>
-                    <li><a href="#!">Forum</a></li>
+                    <li><a href="Zlote">Złote stony</a></li>
                     <li><a href="Chat">Chat</a></li>
-                    <li><a href="#!">Kalendarz wydarzeń</a></li>
-                    <li><a href="#!">Spotkania integracyjne</a></li>
-                    <li><a href="#!">Ogłoszenia</a></li>
+                    <li><a href="Announcements">Ogłoszenia</a></li>
                     <li><a href="#!">Zniżki studenckie</a></li>
-                    <li><a href="#!">Turnieje</a></li>
+                    <li><a href="#!">Kalendarz wydarzeń<IoIosBuild className="text-2xl"/></a></li>
+                    <li><a href="#!">Spotkania integracyjne<IoIosBuild className="text-2xl"/></a></li>
+                    <li><a href="#!">Turnieje<IoIosBuild className="text-2xl"/></a></li>
+                    <li><a href="#!">Forum<IoIosBuild className="text-2xl"/></a></li>
                 </ul>
             </div>
         </>

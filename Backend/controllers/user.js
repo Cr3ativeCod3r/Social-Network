@@ -60,7 +60,8 @@ exports.register = async (req, res) => {
             year: rok
         }).save();
 
-        res.status(201).json({message: "Użytkownik został pomyślnie zarejestrowany."});
+        res.status(400).json({message: "Zarejestrowano, zaloguj się."});
+
 
     } catch (error) {
         res.status(500).json({message: error.message});
@@ -109,7 +110,9 @@ exports.login = async (req, res) => {
                 message: "Invalid credentials.Please try again.",
             });
         }
-        const token = generateToken({id: user._id.toString()}, "7d");
+        const token = generateToken({id: user._id.toString(), userTyp: user.usertyp}, "1m");
+        res.cookie('token', token, {path: '/', httpOnly: true});
+        
         res.send({
             id: user._id,
             username: user.username,

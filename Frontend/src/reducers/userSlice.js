@@ -9,7 +9,6 @@ const userSlice = createSlice({
     reducers: {
         login: (state, action) => action.payload,
         logout: (state) => {
-            console.log("logout")
             Cookies.remove('user');
             return null;
         },
